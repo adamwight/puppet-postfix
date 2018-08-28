@@ -9,7 +9,7 @@ Facter.add(:postfix) do
     }
 
     facts = {}
-    Facter::Core::Execution.execute("postconf -d -x #{configs.keys.join(' ')}").each_line do |line|
+    Facter::Core::Execution.execute("/usr/local/sbin/postconf -d -x #{configs.keys.join(' ')}").each_line do |line|
       parameter, value = line.chomp.split(%r{ *= *}, 2)
       facts[configs[parameter.to_sym]] = value
     end
